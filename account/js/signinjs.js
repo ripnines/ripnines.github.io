@@ -35,6 +35,7 @@ const link = localStorage.getItem('link');
   var user = userCredential.user;
      console.error('signed in'); 
      window.location.replace(link)
+     localStorage.removeItem('link');
   })
  
   .catch((error) => {

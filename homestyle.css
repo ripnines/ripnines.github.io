@@ -21,7 +21,7 @@ overflow: hidden;
 }
 
 #header td {
-  color: white;
+color: white;
   width: 10%;
  float: left;
   user-select: none;
@@ -30,7 +30,12 @@ overflow: hidden;
     margin: -9px 2px 0;
     min-width: 70px;
     max-width: 100px;
-     
+
+}
+
+#header td a {
+    color: inherit;
+    text-decoration: none;
 }
 
 #header td:hover {

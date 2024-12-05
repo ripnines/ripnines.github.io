@@ -25,7 +25,7 @@ import {
   
   
     //___________________________________________
-const link = localStorage.getItem('link');
+var link = localStorage.getItem('link');
   
   
    function signInEmail(email,password) {
@@ -34,8 +34,10 @@ const link = localStorage.getItem('link');
   .then((userCredential) => {
   var user = userCredential.user;
      console.error('signed in'); 
-     window.location.replace(link)
-     localStorage.removeItem('link');
+     var linkRightNow = link
+    localStorage.removeItem('link');
+    window.location.replace(link);
+
   })
  
   .catch((error) => {

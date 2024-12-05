@@ -26,7 +26,7 @@ import {
   
   
     //___________________________________________
-var email = document.getElementById('email').value;
+var email = document.getElementById('email');
  localStorage.removeItem('email');
 document.getElementById('message').textContent = 'A confirmation email has bent sent to ' + email;
      // ..

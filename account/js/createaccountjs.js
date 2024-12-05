@@ -6,7 +6,8 @@ import {
   signOut,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  connectAuthEmulator
+  connectAuthEmulator,
+  sendEmailVerification
 } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js';
 
   // Your web app's Firebase configuration
@@ -25,17 +26,30 @@ import {
   
   
     //___________________________________________
-const link = localStorage.getItem('link');
-  
+var link = localStorage.getItem('link');
+ 
      // ..
+  
+    function emailVeri() {
+   sendEmailVerification(auth.currentUser)
+    .then(() => {
+  
+    });
+
+  }
   
    function signUpEmail(email,password) {
   
   createUserWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
     // Signed in 
+    
     var user = userCredential.user;
-    window.location.replace(link);
+    
+    emailVeri()
+    localStorage.setItem('email', document.getElementById('email').value); 
+    window.location.replace('https://ripnines.github.io/account/confirmemail');
+
     // ...
   })
   .catch((error) => {
@@ -46,6 +60,8 @@ const link = localStorage.getItem('link');
   });
   
   }
+  
+
     
   //___________________________________________
   

@@ -80,7 +80,7 @@ box-sizing: border-box;
 border: 1px solid #E4D24C;
 }
 
-#signinbox p {
+.text {
  color: #DDDEC8;
  margin: 0 0 0 1vh;
  padding: 0;
@@ -88,6 +88,15 @@ border: 1px solid #E4D24C;
  font-size: 2.5vh;
  font-family: Helvetica;
  
+}
+
+#error {
+   color: #E81818;
+ margin: -2vh 0 2vh 0;
+ padding: 0;
+ text-align: center;
+ font-size: 2.5vh;
+ font-family: Helvetica;
 }
 
 #signinheader {
@@ -140,6 +149,7 @@ font-size: 2.5vh;
  background-color: #08252C;
  color: #B7C0C3;
  user-select: none;
+  font-family: Helvetica;
 
 }
 

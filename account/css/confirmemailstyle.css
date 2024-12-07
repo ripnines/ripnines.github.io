@@ -105,16 +105,16 @@ border: 1px solid #E4D24C;
   height: 15%;
   width: 100%;
   text-align: center;
-  margin-top: 5vh;
+  margin-top: 8vh;
 }
 
-#signinbutt p {
+#signinbutt a {
   display: flex;
   justify-content: center;
   align-items: center;
  width: 30%;
 height: 100%;
-font-size: 3vh;
+font-size: 4vh;
  border-radius: 10px;
  background-color: #08252C;
  color: #B7C0C3;
@@ -122,12 +122,12 @@ font-size: 3vh;
 
 }
 
-#signinbutt p:hover {
+#signinbutt a:hover {
 background-color: #0B323A;
 
 }
 
-#signinbutt p:active {
+#signinbutt a:active {
 background-color: #15515E;
 
 }

@@ -23,12 +23,14 @@ import {
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
-  
+
   
     //___________________________________________
-var link = localStorage.getItem('link');
- 
-     // ..
+    
+      document.getElementById('error').style.color = "#020B0D";
+      
+    //___________________________________________
+
   
     function emailVeri() {
    sendEmailVerification(auth.currentUser)
@@ -56,7 +58,9 @@ var link = localStorage.getItem('link');
     var errorCode = error.code;
     var errorMessage = error.message;
     console.error('Error signing in:', errorCode, errorMessage); 
-    // ..
+    var errorfortext = errorCode.replace("auth/", "").replace("-", " ");
+    document.getElementById('error').style.color = "#E81818";
+    document.getElementById('error').textContent = errorfortext;
   });
   
   }

@@ -19,31 +19,42 @@ import {
     appId: "1:541327244207:web:2502bfb6ddfa1d25a6cd5a"
   };
 
-  // Initialize Firebase
+
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
+      //___________________________________________
   
+  document.getElementById('error').style.color = "#020B0D";
   
     //___________________________________________
-var link = localStorage.getItem('link');
-  
-  
+    
    function signInEmail(email,password) {
  
 	 signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
   var user = userCredential.user;
-     console.error('signed in'); 
-     var linkRightNow = link
+  
+   if (user.emailVerified) {
+     var link = localStorage.getItem('link');
+    var linkRightNow = link;
     localStorage.removeItem('link');
     window.location.replace(link);
-
+    }
+    
+    else {
+     console.error('Not verified'); 
+    signOut(auth);
+       }
+   
   })
  
   .catch((error) => {
     var errorCode = error.code;
     var errorMessage = error.message;
     console.error('Error signing in:', errorCode, errorMessage); 
+    var errorfortext = errorCode.replace("auth/", "").replace("-", " ");
+    document.getElementById('error').style.color = "#E81818";
+    document.getElementById('error').textContent = errorfortext;
   });
   
   }

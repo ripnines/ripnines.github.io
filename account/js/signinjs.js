@@ -43,6 +43,8 @@ import {
     
     else {
      console.error('Not verified'); 
+    document.getElementById('error').style.color = "#E81818";
+    document.getElementById('error').textContent = "verify email";
     signOut(auth);
        }
    

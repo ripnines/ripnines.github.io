@@ -1,16 +1,14 @@
-localStorage.setItem('link', window.location.href); 
+
  
- // Import the functions you need from the SDKs you need
+
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
 
 import {
  getAuth,
   onAuthStateChanged, 
   signOut,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
   connectAuthEmulator
 } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js';
 
@@ -27,6 +25,34 @@ import {
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
+  const db = getFirestore(app);
+  
+//------------------------------------
+
+var profilelink;
+//------------------------------------
+  auth.onAuthStateChanged((user) => {
+	if (user)  {
+   var uid = user.uid;
+   profilelink = "https://ripnines.github.io/account/profile"
+   if (user.displayName) {
+    document.getElementById('signin').textContent = user.displayName;
+   } else {
+    document.getElementById('signin').textContent = "Name";
+   }
+  
+  } else {
+  console.log("not signedin")
+  profilelink = "https://ripnines.github.io/account/signin"
+  document.getElementById('signin').textContent = "Sign In";
+  }
+
+});
+
+document.getElementById('signin').onclick = function() {
+localStorage.setItem('link', window.location.href); 
+window.location.replace(profilelink);
+}
   
   
   

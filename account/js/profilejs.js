@@ -30,7 +30,7 @@ auth.onAuthStateChanged((user) => {
   if (user) {
     document.getElementById("name").textcontent = user.displayName;
 
- function updateProfile() {
+ window.updateProfileGlobal = function () {
     updateProfile(user, {displayName: document.getElementById("name").value})
     .then(() => {
         var displayName = user.displayName;
@@ -46,16 +46,18 @@ auth.onAuthStateChanged((user) => {
 }
 
 
-    document.getElementById("button").onclick = function () {
-      console.log("he;;p")
-      updateProfile()
-    }
+   
   } else {
     console.log("not signedin")
-    document.getElementById("error").style.color = "#E81818"
-    document.getElementById("error").textContent = "not signed in"
-    localStorage.setItem("link", window.location.href)
-    window.location.replace("https://ripnines.github.io/account/signin");
+    document.getElementById("error").style.color = "#E81818";
+    document.getElementById("error").textContent = "not signed in";
+    localStorage.setItem("link", window.location.href);
+     window.location.replace("https://ripnines.github.io/account/signin");
   }
   
 })
+
+ document.getElementById("button").onclick = function () {
+      console.log("he;;p");
+      updateProfileGlobal();
+    }

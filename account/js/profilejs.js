@@ -52,7 +52,7 @@ auth.onAuthStateChanged((user) => {
     document.getElementById("error").style.color = "#E81818";
     document.getElementById("error").textContent = "not signed in";
     localStorage.setItem("link", window.location.href);
-     window.location.replace("https://ripnines.github.io/account/signin");
+    //  window.location.replace("https://ripnines.github.io/account/signin");
   }
   
 })
@@ -60,4 +60,8 @@ auth.onAuthStateChanged((user) => {
  document.getElementById("button").onclick = function () {
       console.log("he;;p");
       updateProfileGlobal();
+     var link = localStorage.getItem('link');
+    var linkRightNow = link;
+    localStorage.removeItem('link');
+      window.location.replace(link)
     }

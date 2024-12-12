@@ -48,14 +48,14 @@ auth.onAuthStateChanged((user) => {
 
     document.getElementById("button").onclick = function () {
       console.log("he;;p")
-      updateprofile()
+      updateProfile()
     }
   } else {
     console.log("not signedin")
     document.getElementById("error").style.color = "#E81818"
     document.getElementById("error").textContent = "not signed in"
     localStorage.setItem("link", window.location.href)
-    //  window.location.replace("https://ripnines.github.io/account/signin");
+    window.location.replace("https://ripnines.github.io/account/signin");
   }
   
 })

@@ -31,7 +31,7 @@ var profilelink;
   auth.onAuthStateChanged((user) => {
 	if (user)  {
    var uid = user.uid;
-   profilelink = "https://ripnines.github.io/account/profile"
+   var profilelink = "https://ripnines.github.io/account/profile"
    if (user.displayName) {
     document.getElementById('signin').textContent = user.displayName;
    } else {
@@ -40,7 +40,7 @@ var profilelink;
   
   } else {
   console.log("not signedin")
-  profilelink = "https://ripnines.github.io/account/signin"
+  var profilelink = "https://ripnines.github.io/account/signin"
   document.getElementById('signin').textContent = "Sign In";
   }
 

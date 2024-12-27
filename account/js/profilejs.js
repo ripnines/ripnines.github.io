@@ -29,7 +29,7 @@ const db = getFirestore(app)
 //------------------------------------------------
 auth.onAuthStateChanged((user) => {
   if (user) {
-    document.getElementById("name").textcontent = user.displayName;
+    document.getElementById("name").textContent = user.displayName;
 
  window.updateProfileGlobal = function () {
     updateProfile(user, {displayName: document.getElementById("name").value})

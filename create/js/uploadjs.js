@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js"
-import { getFirestore } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js"
+import { getFirestore, collection, addDoc, doc  } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js"
 
 import {
 
@@ -38,12 +38,13 @@ function uploadsong(user) {
     var artistname = document.getElementById("artists").value;
     
     if (!songname || !artistname) {
-    
    errors("empty");
    console.log(songname);
       console.log(artistname);
    return;
     }
+    
+
     
     addDoc(collection(db,"users", user.uid, "songs"), {  
     artist: artistname,

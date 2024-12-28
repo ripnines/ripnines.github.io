@@ -25,33 +25,43 @@ const db = getFirestore(app)
 //------------------------------------------------
 
 //------------------------------------------------
-function uploadsong1(user) {
+function errors(text) {
+    document.getElementById("error").style.color = "#E81818";
+    document.getElementById("error").textContent = text;
+    console.error(text)
+}
+
+
+function uploadsong(user) {
  console.log("it ran");
     var songname = document.getElementById("name").textContent;
     var artistname = document.getElementById("artists").textContent;
-    db.collection("users").doc(`${user.uid}`).collection("songs").add({
     
-    artist: `${artistname}`,
-    name: `${songname}`,
+    if (!songname || !artistname) {
+   errors("empty");
+   return;
+    }
+    
+    addDoc(collection(db,"users", user.uid, "songs"), {  
+    artist: artistname,
+    name: songname,
     streams: 0
-    
+
     }) .then((docref) => {
       console.log(docref);
     }) .catch((error) => {
-    console.error(error);
+    errors(error);
     });
  
 }
 
 auth.onAuthStateChanged((user) => {
   if (user) {
-  window.uploadsong2 = function() {
-  uploadsong1(user);
+  window.uploadsong = function() {
+  uploadsong(user);
   }
   } else {
-    console.log("not signedin")
-    document.getElementById("error").style.color = "#E81818";
-    document.getElementById("error").textContent = "not signed in";
+		errors("not signed in")
     localStorage.setItem("link", window.location.href);
     //  window.location.href ="https://ripnines.github.io/account/signin";
   }
@@ -63,5 +73,5 @@ auth.onAuthStateChanged((user) => {
 
  document.getElementById("finish").onclick = function () {
      console.log("helloo");
-		uploadsong2(auth.currentUser);
+		uploadsong(auth.currentUser);
     }

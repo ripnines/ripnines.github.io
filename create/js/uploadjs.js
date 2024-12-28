@@ -34,11 +34,14 @@ function errors(text) {
 
 function uploadsong(user) {
  console.log("it ran");
-    var songname = document.getElementById("name").textContent;
-    var artistname = document.getElementById("artists").textContent;
+    var songname = document.getElementById("name").value;
+    var artistname = document.getElementById("artists").value;
     
     if (!songname || !artistname) {
+    
    errors("empty");
+   console.log(songname);
+      console.log(artistname);
    return;
     }
     

@@ -25,16 +25,12 @@ const db = getFirestore(app)
 //------------------------------------------------
 
 //------------------------------------------------
-auth.onAuthStateChanged((user) => {
-  if (user) {
-  
-    window.uploadSong = function () {
-    console.log("it ran");
+function uploadsong1(user) {
+ console.log("it ran");
     var songname = document.getElementById("name").textContent;
     var artistname = document.getElementById("artists").textContent;
-    var users = db.collection("users").doc(`${user.uid}`);
-    users.collection("songs").add({
-        
+    db.collection("users").doc(`${user.uid}`).collection("songs").add({
+    
     artist: `${artistname}`,
     name: `${songname}`,
     streams: 0
@@ -44,8 +40,14 @@ auth.onAuthStateChanged((user) => {
     }) .catch((error) => {
     console.error(error);
     });
- }
+ 
+}
 
+auth.onAuthStateChanged((user) => {
+  if (user) {
+  window.uploadsong2 = function() {
+  uploadsong1(user);
+  }
   } else {
     console.log("not signedin")
     document.getElementById("error").style.color = "#E81818";
@@ -56,7 +58,10 @@ auth.onAuthStateChanged((user) => {
   
 })
 
+
+
+
  document.getElementById("finish").onclick = function () {
      console.log("helloo");
-		uploadSong();
+		uploadsong2(auth.currentUser);
     }

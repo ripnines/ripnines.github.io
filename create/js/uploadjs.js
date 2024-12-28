@@ -29,6 +29,7 @@ auth.onAuthStateChanged((user) => {
   if (user) {
   
     window.uploadSong = function () {
+    console.log("it ran");
     var songname = document.getElementById("name").textContent;
     var artistname = document.getElementById("artists").textContent;
     var users = db.collection("users").doc(`${user.uid}`);
@@ -39,7 +40,7 @@ auth.onAuthStateChanged((user) => {
     streams: 0
     
     }) .then((docref) => {
-    
+      console.log(docref);
     }) .catch((error) => {
     console.error(error);
     });
@@ -56,6 +57,6 @@ auth.onAuthStateChanged((user) => {
 })
 
  document.getElementById("finish").onclick = function () {
-     console.log("helloo")
-
+     console.log("helloo");
+		uploadSong();
     }

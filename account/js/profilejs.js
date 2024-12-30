@@ -26,12 +26,20 @@ const db = getFirestore(app)
 
 //------------------------------------------------
 
-//------------------------------------------------
-auth.onAuthStateChanged((user) => {
-  if (user) {
-    document.getElementById("name").value = user.displayName;
+function errors(text) {
+    document.getElementById("error").style.color = "#E81818";
+    document.getElementById("error").textContent = text;
+    console.error(text);
+}
 
- window.updateProfileGlobal = function () {
+function errorsreset(){
+    document.getElementById("error").style.color = "#020B0D";
+    document.getElementById("error").textContent = "";
+}
+
+//------------------------------------------------
+
+ function updateprofile() {
     updateProfile(user, {displayName: document.getElementById("name").value})
     .then(() => {
         var displayName = user.displayName;
@@ -39,11 +47,16 @@ auth.onAuthStateChanged((user) => {
     }).catch((error) => {
         var errorCode = error.code;
         var errorMessage = error.message;
-        console.error("Error signing in:", errorCode, errorMessage);
-        var errorfortext = errorCode.replace("auth/", "").replace("-", " ");
-        document.getElementById("error").style.color = "#E81818";
-        document.getElementById("error").textContent = errorfortext;
+        errors("Error signing in:", errorCode, errorMessage);
     });
+}
+//------------------------------------------------
+auth.onAuthStateChanged((user) => {
+  if (user) {
+    document.getElementById("name").value = user.displayName;
+
+window.updateprofile = function () {
+updateprofile(user)
 }
 
  window.signOutGlobal = function () {
@@ -51,27 +64,25 @@ auth.onAuthStateChanged((user) => {
  }
    
   } else {
-    console.log("not signedin")
-    document.getElementById("error").style.color = "#E81818";
-    document.getElementById("error").textContent = "not signed in";
-    localStorage.setItem("link", window.location.href);
+ errors("not signed in")
+ localStorage.setItem("link", window.location.href);
     //  window.location.href ="https://ripnines.github.io/account/signin";
   }
   
 })
 
  document.getElementById("finish").onclick = function () {
-      updateProfileGlobal();
+      updateprofile(auth.currentUser);
      var link = localStorage.getItem('link');
      if (link) {
-       var linkRightNow = link;
+     var linkRightNow = link;
     localStorage.removeItem('link');
       window.location.href = link
      } else {
         window.location.href = "https://ripnines.github.io/"
      }
   
-    }
+}
     
      document.getElementById("signout").onclick = function () {
      signOutGlobal();

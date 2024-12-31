@@ -1,6 +1,6 @@
 <html>
 <head>
-  <link rel="stylesheet" href="css/uploadstyle.css">
+  <link rel="stylesheet" href="css/profilestyle.css">
 </head>
 <body>
 <div class="contain">
@@ -8,7 +8,7 @@
 <div id="box">
 
 
-<h1 style="color:#E4D24C;" class="bigtitle">Upload Song
+<h1 style="color:#E4D24C;" class="bigtitle">Share Song
 </h1>
 <h1 class="liltitle"></h1>
 
@@ -23,9 +23,12 @@
 <div id = "left">
 
 <div id="cover">
-
+<img id = "coverimg" src="https://ripnines.github.io/images/imagepicture.png">
 </div>
-
+<p style="text-align: center; margin: 3vh 0 0 0;" class="text">
+<strong>Cover URL<em style="color:red;">*</em></strong>
+</p>
+<input type="text" class="inputs" id = "coverurl" name="coverurl">
 </div>
 
 <div id = "right">
@@ -34,18 +37,32 @@
 </p>
 <input type="text" class="inputs" id = "name" name="name">
 <p class="text" >
-<strong>Artist(s)<em style="color:red;">*</em></strong>
+<strong>Co-artists/Features</strong>
 </p>
 <input type="text" class="inputs" id = "artists" name="artist">
+<p class="text" >
+<strong>Music URL (MP3 recommended)<em style="color:red;">*</em></strong>
+</p>
+<input type="text" class="inputs" id = "musicurl" name="musicurl">
+
 
 <div class="butt">
 <p id="finish">
 Upload
 </p>
+<p id ="playbutt">
+<img id = "playicon" src="https://ripnines.github.io/images/playicon.png">
+</p>
 
 </div>
 </div>
 
+ 
+
+
+
+</div>
+
 
 
 </div>
@@ -54,7 +71,7 @@ Upload
 </div>
 
 </div>
-</div>
+
 <script src="js/uploadjs.js" type="module"></script>
 </body>
 </html>

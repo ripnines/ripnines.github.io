@@ -131,11 +131,13 @@ function imagechecker(image,callback) {
   img.onload = () => {
   callback(true);
   img = null;
+	img.remove()
   };
   img.onerror = () => {
   img = null;
+  img.remove()
   };
-  
+
   
 }
 function imagechanger() {
@@ -163,22 +165,22 @@ if (a) {
 //audio------------------------------------------------
 
 setInterval(audiochanger, 500);
-  const extensions = ["mp3","wav","ogg","mp3","flac","aac","m4a",];
+
 	var testaudio = new Audio();
 	testaudio.src = "";
 
 async function audiochecker(audio,callback) {
 
 try {
-
+const extensions = ["mp3","wav","ogg","mp3","flac","aac","m4a",];
 const formatted = audio.split('.').pop().toLowerCase();
 if (extensions.includes(formatted)) {
 
 const response = await fetch(audio, {method: 'HEAD'}).catch(error=>{return null});
-if (!response.ok) {
+if (!response.ok || !response) {
 callback(false);
 return;
-
+}
 const contenttype = response.headers.get('Content-Type');
 if (contenttype && contenttype.startsWith('audio/')) {
 callback(true);
@@ -186,7 +188,7 @@ callback(true);
 callback(false);
 }
 
-}
+
 
 } else {
 callback(false);

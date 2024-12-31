@@ -117,8 +117,13 @@ border: 1px solid #E4D24C;
 #cover {
   width: 40vh;
   height: 40vh;
-  background-color: blue;
   margin: 0 auto;
+  border-radius: 1vh;
+}
+
+#cover img {
+  height: 100%;
+  width: 100%;
   border-radius: 1vh;
 }
 
@@ -153,7 +158,7 @@ border: 1px solid #E4D24C;
   height: 15%;  
   border-radius: 10px;
   border: 1px solid #EBECD9;
-  margin: 3vh 0 3vh;
+  margin: 2vh 0 2vh;
   background-color: #130F0F;
   padding-left: 2vh;
   box-sizing: border-box;
@@ -170,34 +175,51 @@ border: 1px solid #E4D24C;
   border: 1.5px solid white;
 }
 
+#coverurl {
+    width: 40vh !important;
+}
+
 .butt {
   height: 15%;
   width: 100%;
   text-align: center;
   margin-left:3vh;
+
 }
 
 .butt p {
   display: flex;
   justify-content: center;
   align-items: center;
- width: 90%;
+ width: 65%;
 height: 100%;
 font-size:3.5vh;
  border-radius: 10px;
  user-select: none;
  font-family: Helvetica;
   color: #B7C0C3; 
+background-color: #08252C;
+float: left;
 }
 
-#finish {
- background-color: #08252C;
+.butt p:hover {
+ filter: brightness(130%);
 }
 
-#finish:hover {
- filter: brightness(115%);
+.butt p:active {
+   filter: brightness(150%);
 }
 
-#finish:active {
-   filter: brightness(130%);
+#playbutt {
+ width: 10vh !important;
+ border-radius: 100vw !important;
+ margin-left: 3vh;
+ user-select: none;
+ 
+}
+
+#playbutt img {
+  
+width: 100%;
+height: 100%;
 }

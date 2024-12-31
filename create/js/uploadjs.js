@@ -76,10 +76,10 @@ function uploadsong(user) {
    return;
    }
     
-    updateDoc(collection(db,"users", user.uid), {  
+    updateDoc(db,"users", user.uid), {  
     name: user.displayName
 
-    }) .then((docref) => {
+    } .then((docref) => {
       console.log(docref);
       errorsreset();
     }) .catch((error) => {
@@ -123,7 +123,13 @@ setInterval(imagechanger, 500);
 
 function imagechecker(image,callback) {
 	const img = new Image();
-	img.src = image;
+  try {
+	img.src = image; 
+  } 
+  catch(error)
+  {
+  
+  }
   
   if (img.complete) {
   
@@ -172,7 +178,13 @@ setInterval(audiochanger, 500);
 
 async function audiochecker(audio,callback) {
 try {
+try {
 const response = await fetch(audio, {method: 'HEAD'});
+} 
+catch (error) {
+
+}
+
 const contenttype = response.headers.get('Content-Type');
 if (contenttype && contenttype.startsWith('audio/')) {
 callback(true)

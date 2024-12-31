@@ -5,7 +5,7 @@ import {
 	getFirestore, 
 	collection, 
 	addDoc, 
-  	updateDoc,
+  updateDoc,
 	doc 
   
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js"
@@ -124,7 +124,7 @@ auth.onAuthStateChanged((user) => {
 setInterval(imagechanger, 500);
 
 function imagechecker(image,callback) {
-	const img = new Image();
+	let img = new Image();
  
 	img.src = image; 
   
@@ -163,30 +163,38 @@ if (a) {
 //audio------------------------------------------------
 
 setInterval(audiochanger, 500);
-
+  const extensions = ["mp3","wav","ogg","mp3","flac","aac","m4a",];
 	var testaudio = new Audio();
 	testaudio.src = "";
 
 async function audiochecker(audio,callback) {
+
 try {
 
-const response = await fetch(audio, {method: 'HEAD'});
+const formatted = audio.split('.').pop().toLowerCase();
+if (extensions.includes(formatted)) {
 
+const response = await fetch(audio, {method: 'HEAD'}).catch(error=>{return null});
 if (!response.ok) {
-callback(false)
+callback(false);
 return;
-}
 
 const contenttype = response.headers.get('Content-Type');
 if (contenttype && contenttype.startsWith('audio/')) {
-callback(true)
+callback(true);
 } else {
-callback(false)
+callback(false);
 }
 
+}
+
+} else {
+callback(false);
+return;
+}
 
 } catch(error) {
-callback(false)
+callback(false);
 }
   
 }

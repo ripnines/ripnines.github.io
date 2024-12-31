@@ -121,7 +121,12 @@ auth.onAuthStateChanged((user) => {
 
 //image------------------------------------------------
 
-setInterval(imagechanger, 500);
+document.getElementById("coverurl").addEventListener("keyup", function() {
+imagechanger()
+})
+document.getElementById("coverurl").addEventListener("paste", function() {
+imagechanger()
+})
 
 function imagechecker(image,callback) {
 	let img = new Image();
@@ -130,12 +135,10 @@ function imagechecker(image,callback) {
   
   img.onload = () => {
   callback(true);
-  img = null;
 	img.remove()
   };
   img.onerror = () => {
-	    callback(false);
-  img = null;
+  callback(false);
   img.remove()
   };
 
@@ -165,7 +168,12 @@ if (a) {
 }
 //audio------------------------------------------------
 
-setInterval(audiochanger, 500);
+document.getElementById("musicurl").addEventListener("keyup", function() {
+audiochanger()
+})
+document.getElementById("musicurl").addEventListener("paste", function() {
+audiochanger()
+})
 
 	var testaudio = new Audio();
 	testaudio.src = "";
@@ -177,19 +185,19 @@ const extensions = ["mp3","wav","ogg","mp3","flac","aac","m4a",];
 const formatted = audio.split('.').pop().toLowerCase();
 if (extensions.includes(formatted)) {
 
+if (await fetch(audio, {method: 'HEAD'}).catch(error=>{return null})) {
 const response = await fetch(audio, {method: 'HEAD'}).catch(error=>{return null});
-if (!response.ok || !response) {
+} else {
 callback(false);
 return;
 }
+
 const contenttype = response.headers.get('Content-Type');
 if (contenttype && contenttype.startsWith('audio/')) {
 callback(true);
 } else {
 callback(false);
 }
-
-
 
 } else {
 callback(false);

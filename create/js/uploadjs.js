@@ -30,7 +30,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
 const db = getFirestore(app)
-
 //------------------------------------------------
 
 var imagevalid = false;
@@ -136,7 +135,7 @@ const formatted = image.split('.').pop().toLowerCase();
 var response;
 if (extensions.includes(formatted)) {
 
-if (await fetch(image, {method: 'HEAD'}).catch(error=>{return null})) {
+if (await fetch(image, {method: 'HEAD', mode: 'no-cors'}).catch(error=>{return null})) {
 response = await fetch(image, {method: 'HEAD'});
 } else {
 callback(false);
@@ -204,7 +203,7 @@ var response;
 if (extensions.includes(formatted)) {
 
 if (await fetch(audio, {method: 'HEAD'}).catch(error=>{return null})) {
-response = await fetch(audio, {method: 'HEAD'});
+response = await fetch(audio, {method: 'HEAD', mode: 'no-cors'});
 } else {
 callback(false);
 return;

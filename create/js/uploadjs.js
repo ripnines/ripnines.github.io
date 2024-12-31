@@ -5,7 +5,7 @@ import {
 	getFirestore, 
 	collection, 
 	addDoc, 
-  updateDoc,
+  	updateDoc,
 	doc 
   
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js"
@@ -50,7 +50,7 @@ function errorsreset(){
 
 //------------------------------------------------
 
-function uploadsong(user) {
+async function uploadsong(user) {
     console.log("it ran");
     var name = document.getElementById("name").value;
     var artists = document.getElementById("artists").value;
@@ -76,29 +76,31 @@ function uploadsong(user) {
    return;
    }
     
-    updateDoc(db,"users", user.uid), {  
+    try {
+    await updateDoc(doc(db,"users", user.uid), {  
     name: user.displayName
-
-    } .then((docref) => {
-      console.log(docref);
-      errorsreset();
-    }) .catch((error) => {
-    errors(error);
-    });
+    }) 
+       errorsreset();
+    } catch(error) {
+       errors(error);
     
-    addDoc(collection(db,"users", user.uid, "songs"), {  
+    }
+    
+    try {
+  await addDoc(collection(db,"users", user.uid, "songs"), {  
     artist: artists,
     name: name,
     musicurl: musicurl,
     coverurl: coverurl,
     streams: 0
 
-    }) .then((docref) => {
-      console.log(docref);
-      errorsreset();
-    }) .catch((error) => {
-    errors(error);
     });
+      errorsreset();
+    } catch(error) {
+        errors(error);
+    }
+    
+    
 
 }
 
@@ -123,28 +125,17 @@ setInterval(imagechanger, 500);
 
 function imagechecker(image,callback) {
 	const img = new Image();
-  try {
+ 
 	img.src = image; 
-  } 
-  catch(error)
-  {
   
-  }
-  
-  if (img.complete) {
-  
-  callback(true); }
-  else {
   img.onload = () => {
   callback(true);
+  img = null;
   };
   img.onerror = () => {
-  callback(false);
+  img = null;
   };
   
-  }
-  
-  img.remove;
   
 }
 function imagechanger() {
@@ -178,11 +169,12 @@ setInterval(audiochanger, 500);
 
 async function audiochecker(audio,callback) {
 try {
-try {
-const response = await fetch(audio, {method: 'HEAD'});
-} 
-catch (error) {
 
+const response = await fetch(audio, {method: 'HEAD'});
+
+if (!response.ok) {
+callback(false)
+return;
 }
 
 const contenttype = response.headers.get('Content-Type');

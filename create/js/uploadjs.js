@@ -134,6 +134,7 @@ function imagechecker(image,callback) {
 	img.remove()
   };
   img.onerror = () => {
+	    callback(false);
   img = null;
   img.remove()
   };

@@ -128,22 +128,39 @@ document.getElementById("coverurl").addEventListener("paste", function() {
 imagechanger()
 })
 
-function imagechecker(image,callback) {
-	let img = new Image();
- 
-	img.src = image; 
-  
-  img.onload = () => {
-  callback(true);
-	img.remove()
-  };
-  img.onerror = () => {
-  callback(false);
-  img.remove()
-  };
+async function imagechecker(image,callback) {
 
+try {
+const extensions = ["jpg","png","jpeg","svg","webp"];
+const formatted = image.split('.').pop().toLowerCase();
+var response;
+if (extensions.includes(formatted)) {
+
+if (await fetch(image, {method: 'HEAD'}).catch(error=>{return null})) {
+response = await fetch(image, {method: 'HEAD'});
+} else {
+callback(false);
+return;
+}
+
+const contenttype = response.headers.get('Content-Type');
+if (contenttype && contenttype.startsWith('image/')) {
+callback(true);
+} else {
+callback(false);
+}
+
+} else {
+callback(false);
+return;
+}
+
+} catch(error) {
+callback(false);
+}
   
 }
+
 function imagechanger() {
 
 let a  = document.getElementById("coverurl").value;
@@ -183,10 +200,11 @@ async function audiochecker(audio,callback) {
 try {
 const extensions = ["mp3","wav","ogg","mp3","flac","aac","m4a",];
 const formatted = audio.split('.').pop().toLowerCase();
+var response;
 if (extensions.includes(formatted)) {
 
 if (await fetch(audio, {method: 'HEAD'}).catch(error=>{return null})) {
-const response = await fetch(audio, {method: 'HEAD'}).catch(error=>{return null});
+response = await fetch(audio, {method: 'HEAD'});
 } else {
 callback(false);
 return;

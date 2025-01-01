@@ -62,7 +62,7 @@ updateprofile(user)
   } else {
  errors("not signed in")
  localStorage.setItem("link", window.location.href);
-    //  window.location.href ="https://ripnines.github.io/account/signin";
+  window.location.href ="https://ripnines.github.io/account/signin";
   }
   
 })

@@ -39,7 +39,7 @@ function errorsreset(){
 
 //------------------------------------------------
 
- function updateprofile() {
+ function updateprofile(user) {
     updateProfile(user, {displayName: document.getElementById("name").value})
     .then(() => {
         var displayName = user.displayName;
@@ -58,10 +58,6 @@ auth.onAuthStateChanged((user) => {
 window.updateprofile = function () {
 updateprofile(user)
 }
-
- window.signOutGlobal = function () {
- signOut(auth);
- }
    
   } else {
  errors("not signed in")
@@ -71,7 +67,7 @@ updateprofile(user)
   
 })
 
- document.getElementById("finish").onclick = function () {
+ document.getElementById("finish").onmousedown = function () {
       updateprofile(auth.currentUser);
      var link = localStorage.getItem('link');
      if (link) {
@@ -84,8 +80,8 @@ updateprofile(user)
   
 }
     
-     document.getElementById("signout").onclick = function () {
-     signOutGlobal();
+     document.getElementById("signout").onmousedown = function () {
+     signOut(auth);
      var link = localStorage.getItem('link');
     var linkRightNow = link;
     localStorage.removeItem('link');

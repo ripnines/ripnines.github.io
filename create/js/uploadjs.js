@@ -102,25 +102,14 @@ async function uploadsong(user) {
     coverurl: coverurl,
     streams: 0
 
-    }) 
-    
-    uploadRef.then(
-    function (value) {
-    
+    });
+ 
     completed = true;
     completion();
-    
-    },
-    function (error) {
-    
-    completed = false;
-    completion();
-    
-    }
-    
-    );
 
     } catch(error) {
+       completed = false;
+       completion();
         errors(error);
   }
     

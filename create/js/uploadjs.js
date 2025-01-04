@@ -35,6 +35,14 @@ const db = getFirestore(app)
 var imagevalid = false;
 var audiovalid = false;
 
+var mainartist;
+var name; 
+var artists; 
+var musicurl; 
+var coverurl;
+
+var completed = null;
+
 //------------------------------------------------
 function errors(text) {
     document.getElementById("error").style.color = "#E81818";
@@ -50,11 +58,11 @@ function errorsreset(){
 //------------------------------------------------
 
 async function uploadsong(user) {
-    console.log("it ran");
-    var name = document.getElementById("name").value;
-    var artists = document.getElementById("artists").value;
-    var musicurl = document.getElementById("musicurl").value;
-    var coverurl = document.getElementById("coverurl").value;
+		mainartist = user.displayName
+    name = document.getElementById("name").value; //-name like song name
+    artists = document.getElementById("artists").value; //coartists
+    musicurl = document.getElementById("musicurl").value;
+    coverurl = document.getElementById("coverurl").value;
     
     if (!name || !artists || !musicurl || !coverurl) {
    errors("missing values");
@@ -86,19 +94,37 @@ async function uploadsong(user) {
     }
     
     try {
-  await addDoc(collection(db,"users", user.uid, "songs"), {  
-    artist: artists,
+    const uploadRef = await addDoc(collection(db,"users", user.uid, "songs"), {  
+    mainartist: mainartist,
+    artists: artists,
     name: name,
     musicurl: musicurl,
     coverurl: coverurl,
     streams: 0
 
-    });
-      errorsreset();
-    } catch(error) {
-        errors(error);
+    }) 
+    
+    uploadRef.then(
+    function (value) {
+    
+    completed = true;
+    completion();
+    
+    },
+    function (error) {
+    
+    completed = false;
+    completion();
+    
     }
     
+    );
+
+    } catch(error) {
+        errors(error);
+  }
+    
+
     
 
 }
@@ -135,9 +161,9 @@ const formatted = image.split('.').pop().toLowerCase();
 var response;
 if (extensions.includes(formatted)) {
 
-if (await fetch(image, {method: 'HEAD', mode: 'no-cors'}).catch(error=>{return null})) {
-response = await fetch(image, {method: 'HEAD'});
-} else {
+
+response = await fetch(image, {method: 'HEAD', mode: 'no-cors'});
+if (!response.ok || !response) {
 callback(false);
 return;
 }
@@ -202,9 +228,10 @@ const formatted = audio.split('.').pop().toLowerCase();
 var response;
 if (extensions.includes(formatted)) {
 
-if (await fetch(audio, {method: 'HEAD'}).catch(error=>{return null})) {
+
 response = await fetch(audio, {method: 'HEAD', mode: 'no-cors'});
-} else {
+if (!response.ok || !response) {
+
 callback(false);
 return;
 }
@@ -278,16 +305,43 @@ document.getElementById("playicon").src = "https://ripnines.github.io/images/pla
 ispaused = false;
 }
  
-
 }
 
 }
 
+//completion------------------------------------------------
 
+function createhtml(html) {
+var frag = document.createDocumentFragment(),
+		temp = document.createElement('div');
+    temp.innerHTML = html;
+    while (temp.firstChild) {
+    frag.appendChild(temp.firstChild);
+    return frag;
+    }
+}
+
+function completion() {
+if (completed == true) {
+var fragment = createhtml("<div id='completionscreen'><img id = 'completionscreencheck' src='https://ripnines.github.io/images/checkicon.png'><img id = 'completionscreenimage' src='https://ripnines.github.io/images/imagepicture.png'><p id = 'songtitle' class= 'liltitle'>ghost town by brian</p><div class='butt' id = 'completionscreenbutton'><p >Finish</p></div></div>");
+
+document.getElementById("completionscreenimage").src = coverurl
+document.getElementById("songtitle").textContent = mainartist + "," + artists
+document.getElementById("completionscreenbutton").onmousedown = function () {
+ window.location.href = ""
+ }
+
+
+
+document.body.insertBefore(fragment,document.body.childNodes[0]);
+} else {
+
+}
+
+}
 
 //upload------------------------------------------------
 
  document.getElementById("finish").onmousedown = function () {
-     console.log("helloo");
 		uploadsong(auth.currentUser);
 }

@@ -314,6 +314,7 @@ function completion() {
 if (completed == true) {
 var fragment = createhtml("<div id='completionscreen'><img id = 'completionscreencheck' src='https://ripnines.github.io/images/checkicon.png'><img id = 'completionscreenimage' src='https://ripnines.github.io/images/imagepicture.png'><p id = 'songtitle' class= 'liltitle'>ghost town by brian</p><div class='butt' id = 'completionscreenbutton'><p >Finish</p></div></div>");
 
+document.body.insertBefore(fragment,document.body.childNodes[0]);
 document.getElementById("completionscreenimage").src = coverurl
 document.getElementById("songtitle").textContent = mainartist + "," + artists
 document.getElementById("completionscreenbutton").onmousedown = function () {
@@ -322,7 +323,7 @@ document.getElementById("completionscreenbutton").onmousedown = function () {
 
 
 
-document.body.insertBefore(fragment,document.body.childNodes[0]);
+
 } else {
 
 }

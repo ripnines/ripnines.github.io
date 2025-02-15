@@ -37,34 +37,8 @@ import {
 
 var profilelink;
 
-//profilesigninthing------------------------------------
-  auth.onAuthStateChanged((user) => {
-	if (user)  {
-   var uid = user.uid;
-   profilelink = "https://ripnines.github.io/account/profile";
-  
-   if (user.displayName) {
-    document.getElementById('signin').textContent = user.displayName;
-   } else {
-    document.getElementById('signin').textContent = "Name";
-   }
-  
-  } else {
-  console.log("not signedin")
-  profilelink = "https://ripnines.github.io/account/signin";
-  document.getElementById('signin').textContent = "Sign In";
-  }
+//getting songs from database------------------------------------
 
-});
-
-document.getElementById('signin').onmousedown = function() {
-localStorage.setItem('link', window.location.href); 
-console.log(profilelink)
-window.location.href = profilelink;
-
-}
-
-//------------------------------------
 async function getsongs(user) {
 
 try {
@@ -76,7 +50,49 @@ console.log(doc.id, "=>", doc.data());
 });
 
 } catch(error) {
-
+console.log(error)
 }
 
 }
+
+//profilesigninthing------------------------------------
+
+  auth.onAuthStateChanged((user) => {
+	if (user)  {
+  
+  //change user profile------------------------------------
+  
+   var uid = user.uid;
+   profilelink = "https://ripnines.github.io/account/profile";
+  
+   if (user.displayName) {
+    document.getElementById('signin').textContent = user.displayName;
+   } else {
+    document.getElementById('signin').textContent = "Name";
+   }
+   
+  //change user profile------------------------------------
+  
+  getsongs(user);
+   
+ //change the picture and link------------------------------------
+  
+  } else {
+  console.log("not signedin")
+  profilelink = "https://ripnines.github.io/account/signin";
+  document.getElementById('signin').textContent = "Sign In";
+  }
+
+});
+
+//------------------------------------
+
+document.getElementById('signin').onmousedown = function() {
+localStorage.setItem('link', window.location.href); 
+console.log(profilelink)
+window.location.href = profilelink;
+
+}
+
+//------------------------------------
+

@@ -48,9 +48,9 @@ const songRef = await getDocs(collection(db,"users", user.uid, "songs"));
 songRef.forEach((doc) => {
 
 
-let values = Object.values(doc.data)
-console.log(values[0],values[2],values[3])
-
+let values = Object.values(doc)
+console.log(values)
+console.log(Object.values(doc.data))
 });
 
 } catch(error) {

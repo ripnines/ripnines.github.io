@@ -47,10 +47,17 @@ try {
 const songRef = await getDocs(collection(db,"users", user.uid, "songs"));
 songRef.forEach((doc) => {
 
+const data = songRef.data;
+var artists = data.artists;
+var coverurl = data.coverurl;
+var mainartist = data.mainartist;
+var musicurl = data.musicurl;
+var name = data.name;
+var streams = data.streams;
 
-let values = Object.values(doc)
-console.log(values)
-console.log(Object.values(doc.data))
+console.log(data,artists,coverurl,mainartist,musicurl,name,streams)
+
+
 });
 
 } catch(error) {

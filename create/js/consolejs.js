@@ -47,15 +47,15 @@ try {
 const songRef = await getDocs(collection(db,"users", user.uid, "songs"));
 songRef.forEach((doc) => {
 
-fromFirestore: (songRef) => {
-const data = songRef.data;
+
+var data = doc.data;
 var artists = data.artists;
 var coverurl = data.coverurl;
 var mainartist = data.mainartist;
 var musicurl = data.musicurl;
 var name = data.name;
 var streams = data.streams;
-}
+
 
 console.log(artists,coverurl,mainartist,musicurl,name,streams);
 

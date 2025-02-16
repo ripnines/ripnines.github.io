@@ -5,10 +5,11 @@
 	getFirestore, 
 	collection, 
 	addDoc, 
-        updateDoc,
-        getDoc,
-        getDocs,
-	doc 
+  updateDoc,
+  getDoc,
+  getDocs,
+	doc
+
   
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js"
 
@@ -46,7 +47,9 @@ try {
 const songRef = await getDocs(collection(db,"users", user.uid, "songs"));
 songRef.forEach((doc) => {
 
-console.log(doc.id, "=>", doc.data());
+
+let values = Object.values(doc.data)
+console.log(values[0],values[2],values[3])
 
 });
 
@@ -55,6 +58,8 @@ console.log(error)
 }
 
 }
+
+
 
 //profilesigninthing------------------------------------
 
@@ -97,3 +102,16 @@ window.location.href = profilelink;
 
 //------------------------------------
 
+function createhtml(html) {
+var frag = document.createDocumentFragment(),
+		temp = document.createElement('div');
+    temp.innerHTML = html;
+    while (temp.firstChild) {
+    frag.appendChild(temp.firstChild);
+    return frag;
+    }
+}
+
+//var fragment = createhtml("");
+
+//document.body.insertBefore(fragment,document.body.childNodes[0]);

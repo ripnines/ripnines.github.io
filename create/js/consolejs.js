@@ -48,13 +48,14 @@ const songRef = await getDocs(collection(db,"users", user.uid, "songs"));
 songRef.forEach((doc) => {
 
 
-var data = doc.data;
-var artists = data.artists;
-var coverurl = data.coverurl;
-var mainartist = data.mainartist;
-var musicurl = data.musicurl;
-var name = data.name;
-var streams = data.streams;
+let data = Object.values(doc.data);
+console.log(doc.data);
+var artists = data[0];
+var coverurl = data[1];
+var mainartist = data[2];
+var musicurl = data[3];
+var name = data[4];
+var streams = data[5];
 
 
 console.log(artists,coverurl,mainartist,musicurl,name,streams);
@@ -86,7 +87,7 @@ console.log(error)
     document.getElementById('signin').textContent = "Name";
    }
    
-  //change user profile------------------------------------
+  //call the get song thing------------------------------------
   
   getsongs(user);
    

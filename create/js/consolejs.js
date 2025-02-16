@@ -48,8 +48,8 @@ const songRef = await getDocs(collection(db,"users", user.uid, "songs"));
 songRef.forEach((doc) => {
 
 
-let data = Object.values(doc.data);
-console.log(doc.data);
+let data = Object.values(doc.data());
+console.log(doc.data());
 var artists = data[0];
 var coverurl = data[1];
 var mainartist = data[2];
@@ -87,7 +87,7 @@ console.log(error)
     document.getElementById('signin').textContent = "Name";
    }
    
-  //call the get song thing------------------------------------
+  //call the get song thiong------------------------------------
   
   getsongs(user);
    

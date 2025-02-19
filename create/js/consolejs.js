@@ -61,7 +61,7 @@ async function getsongs(user) {
   
   //functions for the onmousedown of each song when presened
   
-  const songbutton = document.querySelectorAll("songleft");
+  const songbutton = document.querySelectorAll(".songleft");
 
 songbutton.forEach(songleft => {
 const songid = songleft.getAttribute("songid");

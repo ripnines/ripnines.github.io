@@ -42,17 +42,15 @@ color: white;
 }
 
 #startpage {
-
   background-color: #051F24;
   margin: 0 0 0 0;
-  padding: 0;
+  padding-top: 45px;;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   overflow: hidden;
-
+  box-sizing: border-box;
  
 }
-
 .bigtitle {
   font-size: 13vh;
     text-align: center;
@@ -67,39 +65,6 @@ color: white;
     padding: 0;
     color: #DDDEC8;
         font-family: 'Trebuchet MS', sans-serif;
-}
-
-#buttoncontainer {
-   display: flex;
-  justify-content: center;
-  align-items: center;
- 
-}
-
-
-
-#button {
-    display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #DDDEC8;
-
-  height: 6vh;
-  min-width: 150px;
-  padding: 7px;
-  text-align: center;
-  font-size: 4vh;
-  font-family: Verdana;
-  color: #051F24;
- white-space: nowrap;
- border-radius: 15px;
-
-}
-
-#button:hover {
-  transition: color 0.2s ease ;
-  color:white;
-  
 }
 
 .contain {
@@ -118,5 +83,45 @@ color: white;
     height: 50vh;
     width: 100%;   
        overflow: auto; 
+}
+
+#left {
+  width: 35%;
+  height: 100%;
+  float: left;
+  background-color: blue;
+  margin:0;
+  padding:0;
+  overflow: auto;
+}
+
+
+#right {
+  width: 65%;
+  height: 100%;
+ float: right;
+}
+
+#cover {
+  width:20vw;
+  height: 20vw;
+  margin: 2.5vh auto 0;
+  border-radius: 1vh;
+}
+
+#cover img {
+  height: 100%;
+  width: 100%;
+  border-radius: 1vh;
+}
+
+.songleft {
+  margin:0;
+  padding:0;
+  width: 100%;
+  height: 10%;
+  max-height: 100px;
+  min-height: 50px;
+  background-color: green;
 }
 

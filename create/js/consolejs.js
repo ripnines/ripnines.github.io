@@ -50,7 +50,7 @@ async function getsongs(user) {
 			songarray.push(doc.data());
 
       var htmlforsong = `<p class='songleft' data-songid='${count}'>hello</p>`;
-      
+      console.log(htmlforsong);
       const eachsong = document.getElementById("left").insertAdjacentHTML("beforeend", htmlforsong);
 			count = count + 1;
   
@@ -60,7 +60,7 @@ async function getsongs(user) {
   }
   
   //functions for the onmousedown of each song when presened
-  
+     console.log(songarray);
   const songbutton = document.querySelectorAll(".songleft");
 
 songbutton.forEach(songleft => {
@@ -68,7 +68,7 @@ const songid = songleft.getAttribute("songid");
 
 songleft.onmousedown = function() {
 const songdata = songarray[songid];
-
+console.log(songdata);
       const artists = songdata["artists"];
       const coverurl = songdata["coverurl"];
       const mainartist = songdata["mainartist"];

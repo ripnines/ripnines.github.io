@@ -39,7 +39,8 @@ const songarray= [];
 //getting songs from database------------------------------------
 
 async function getsongs(user) {
-  try {
+
+  try { //gets songs and makes the song left things 
     const songref = await getDocs(collection(db, "users", user.uid, "songs"))
     
     let count = 0;
@@ -57,12 +58,10 @@ async function getsongs(user) {
   } catch (error) {
     console.log(error)
   }
-}
-
-
-//function to display info about song when you click on them------------------------------------
-
-const songbutton = document.querySelectorAll("songleft");
+  
+  //functions for the onmousedown of each song when presened
+  
+  const songbutton = document.querySelectorAll("songleft");
 
 songbutton.forEach(songleft => {
 const songid = songleft.getAttribute("songid");
@@ -83,6 +82,8 @@ const songdata = songarray[songid];
 
 
 });
+
+}
 
 //profilesigninthing------------------------------------
 

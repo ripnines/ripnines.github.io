@@ -49,7 +49,7 @@ async function getsongs(user) {
       let data = Object.values(doc.data());
 			songarray.push(doc.data());
 
-      var htmlforsong = `<p class='songleft' data-songid='${count}'>hello</p>`;
+      var htmlforsong = `<p class='songleft' songid='${count}'>hello</p>`;
       console.log(htmlforsong);
       const eachsong = document.getElementById("left").insertAdjacentHTML("beforeend", htmlforsong);
 			count = count + 1;

@@ -101,6 +101,11 @@ songleft.onmousedown = function() {
 		const songid = songleft.getAttribute("songid");
     let position = songarray.indexOf(songid);
 		const songdata = songarray[position];
+    
+    console.log(songid);
+      console.log(position);
+        console.log(songdata);
+        console.log(songarray);
 
 		const artists = songdata["artists"];
 		const coverurl = songdata["coverurl"];
@@ -108,7 +113,7 @@ songleft.onmousedown = function() {
 		const musicurl = songdata["musicurl"];
 		const name = songdata["name"];
 		const streams = songdata["streams"];
-      //console.log(artists,coverurl,mainartist,musicurl,name,streams)
+      console.log(artists,coverurl,mainartist,musicurl,name,streams)
     docidcurrent = songid;
     document.getElementById("cover").src = coverurl;   
 		document.getElementById("coverurl").value = coverurl;

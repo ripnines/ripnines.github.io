@@ -68,7 +68,7 @@ async function getsongs(user) {
  
 			songarray.push(doc.data());
       
-      let data = Object.values(doc.data());
+      let data = doc.data()
 			const name = data["name"];
       const mainartist = data["mainartist"] ;
       var artists = data["artists"] ;
@@ -99,7 +99,8 @@ songbutton.forEach(songleft => {
 
 songleft.onmousedown = function() {
 		const songid = songleft.getAttribute("songid");
-		const songdata = songarray[songid];
+    let position = songarray.indexOf(songid);
+		const songdata = songarray[position];
 
 		const artists = songdata["artists"];
 		const coverurl = songdata["coverurl"];

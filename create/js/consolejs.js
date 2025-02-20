@@ -64,14 +64,13 @@ async function getsongs(user) {
   try { //gets songs and makes the song left things 
     const songref = await getDocs(collection(db, "users", user.uid, "songs"))
     
+      let count = 0
       songref.forEach((doc) => {
- 			//rename duplicate and change name of object so idk makes it easier 
       
-      window[doc.id] = {...doc.data()}; // make a object with the doc.id name
-			songarray.push(window[doc.id]); //adds object into array with the doc.id as its name
+			songarray.push(doc.data()); //adds object into array with the doc.id as its name
       
-      //now we title each block on the left for songleft so that it shows all the DESC
       let data = doc.data()
+      let docid = doc.id
 			const name = data["name"];
       const mainartist = data["mainartist"] ;
       var artists = data["artists"] ;
@@ -85,9 +84,10 @@ async function getsongs(user) {
 
 			const title = name + " by " + mainartist + artists
 
-      var htmlforsong = `<p class='songleft' songid='${doc.id}'>${title}</p>`;
+      var htmlforsong = `<p class='songleft' songid='${count}' docid='${doc.id}'>${title}</p>`;
  
       const eachsong = document.getElementById("left").insertAdjacentHTML("beforeend", htmlforsong);
+  	  count = count + 1
   
     })
   } catch (error) {
@@ -101,9 +101,9 @@ const songbutton = document.querySelectorAll(".songleft");
 songbutton.forEach(songleft => {
 
 songleft.onmousedown = function() {
+		const docid = songleft.getAttribute("docid");
 		const songid = songleft.getAttribute("songid");
-    let position = songarray.indexOf(songid);
-		const songdata = songarray[position];
+		const songdata = songarray[songid];
     
     console.log(songid);
       console.log(position);
@@ -117,7 +117,9 @@ songleft.onmousedown = function() {
 		const name = songdata["name"];
 		const streams = songdata["streams"];
       console.log(artists,coverurl,mainartist,musicurl,name,streams)
-    docidcurrent = songid;
+      
+    docidcurrent = docid;
+    
     document.getElementById("cover").src = coverurl;   
 		document.getElementById("coverurl").value = coverurl;
 		document.getElementById("name").value = name;

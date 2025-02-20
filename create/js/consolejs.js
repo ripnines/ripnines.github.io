@@ -36,7 +36,7 @@ const db = getFirestore(app)
 
 var profilelink;
 const songarray= [];
-var docidcurrent;
+var docidcurrent= null;
 
 //link chckers------------------------------------
 
@@ -65,10 +65,24 @@ async function getsongs(user) {
     const songref = await getDocs(collection(db, "users", user.uid, "songs"))
     
     songref.forEach((doc) => {
-      let data = Object.values(doc.data());
+ 
 			songarray.push(doc.data());
+      
+      let data = Object.values(doc.data());
+			const name = data["name"];
+      const mainartist = data["mainartist"] ;
+      const artists = data["artists"] ;
+			
+      //quick format of additonal artists
+      if (artists == null) {
+      artists = "";
+      } else {
+      artists = "," + artists
+      }
 
-      var htmlforsong = `<p class='songleft' songid='${doc.id}'>song</p>`;
+			const title = name + " by " + mainartist + artists
+
+      var htmlforsong = `<p class='songleft' songid='${doc.id}'>${title}</p>`;
  
       const eachsong = document.getElementById("left").insertAdjacentHTML("beforeend", htmlforsong);
   
@@ -83,25 +97,16 @@ const songbutton = document.querySelectorAll(".songleft");
 
 songbutton.forEach(songleft => {
 
-const songid = songleft.getAttribute("songid");
-const songdata = songarray[songid];
-
-const artists = songdata["artists"];
-const coverurl = songdata["coverurl"];
-const mainartist = songdata["mainartist"];
-const musicurl = songdata["musicurl"];
-const name = songdata["name"];
-const streams = songdata["streams"];
-
-var artistsedit = "," + artists;
-
-if (artists == null) {
-artistsedit = "";
-} 
-
-songleft.innerHTML = name + " by " + mainartist + artistsedit;
-
 songleft.onmousedown = function() {
+		const songid = songleft.getAttribute("songid");
+		const songdata = songarray[songid];
+
+		const artists = songdata["artists"];
+		const coverurl = songdata["coverurl"];
+		const mainartist = songdata["mainartist"];
+		const musicurl = songdata["musicurl"];
+		const name = songdata["name"];
+		const streams = songdata["streams"];
       //console.log(artists,coverurl,mainartist,musicurl,name,streams)
     docidcurrent = songid;
     document.getElementById("cover").src = coverurl;   

@@ -6,6 +6,7 @@ import {
   signOut,
   createUserWithEmailAndPassword,
   connectAuthEmulator,
+  updateProfile,
   sendEmailVerification
 } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js';
 
@@ -46,6 +47,7 @@ import {
     // Signed in 
     
     var user = userCredential.user;
+      updateProfile(user, {displayName: document.getElementById("name").value})
     
     emailVeri()
     localStorage.setItem('email', document.getElementById('email').value); 
@@ -68,7 +70,7 @@ import {
     
   //___________________________________________
   
-  document.getElementById('signbutton').onclick = function() {
+  document.getElementById('signbutton').onmousedown = function() {
   
   var email = document.getElementById('email').value;
   var password = document.getElementById('password').value;

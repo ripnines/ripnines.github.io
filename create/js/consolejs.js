@@ -106,7 +106,6 @@ songleft.onmousedown = function() {
 		const songdata = songarray[songid];
     
     console.log(songid);
-      console.log(position);
         console.log(songdata);
         console.log(songarray);
 

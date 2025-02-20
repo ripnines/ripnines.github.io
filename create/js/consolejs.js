@@ -64,10 +64,13 @@ async function getsongs(user) {
   try { //gets songs and makes the song left things 
     const songref = await getDocs(collection(db, "users", user.uid, "songs"))
     
-    songref.forEach((doc) => {
- 
-			songarray.push(doc.data());
+      songref.forEach((doc) => {
+ 			//rename duplicate and change name of object so idk makes it easier 
       
+      window[doc.id] = {...doc.data()}; // make a object with the doc.id name
+			songarray.push(window[doc.id]); //adds object into array with the doc.id as its name
+      
+      //now we title each block on the left for songleft so that it shows all the DESC
       let data = doc.data()
 			const name = data["name"];
       const mainartist = data["mainartist"] ;

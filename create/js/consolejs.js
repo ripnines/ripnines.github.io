@@ -71,7 +71,7 @@ async function getsongs(user) {
       let data = Object.values(doc.data());
 			const name = data["name"];
       const mainartist = data["mainartist"] ;
-      const artists = data["artists"] ;
+      var artists = data["artists"] ;
 			
       //quick format of additonal artists
       if (artists == null) {
@@ -183,16 +183,6 @@ async function updatesong(user, docid) {
    console.log("unsuitable audio");
    return;
    }
-    
-    try {
-    await updateDoc(doc(db,"users", user.uid), {  
-    name: user.displayName
-    }) 
-       errorsreset();
-    } catch(error) {
-       errors(error);
-    
-    }
     
     try {
     const uploadRef = await updateDoc(doc(db,"users", user.uid, "songs", docid), {  
